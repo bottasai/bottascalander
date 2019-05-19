@@ -16,8 +16,8 @@ app.get('/user/:a', (req,res)=>{
    console.log(JSON.stringify(req.params));
    // single quotes to the input params is important.
    const query = `MATCH (u:User {Mob: '${req.params.a}'}) RETURN u`
-   const result = dbsession.run(query);
-   result.then(result => {
+   const resultPromise = dbsession.run(query);
+   resultPromise.then(result => {
             dbsession.close();
             const singleRecord = result.records[0];
             const node = singleRecord.get(0);
